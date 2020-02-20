@@ -6,7 +6,7 @@
   More info about this project can be found on my blog:
   http://michaelteeuw.nl
 
-  Written by Michael Teeuw | Xonay Labs.  
+  Written by Michael Teeuw | Xonay Labs, adapted to SH1106 by Gerard Forcada  
   Apache 2 license, all text above must be included 
   in any redistribution.
  ****************************************************/
@@ -14,7 +14,7 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <Adafruit_SH1106.h>
 
 //Define Pins
 #define OLED_RESET 4
@@ -32,21 +32,21 @@
 #define BALL_SIZE 3
 #define SCORE_PADDING 10
 
-#define EFFECT_SPEED 0.5
-#define MIN_Y_SPEED 0.5
-#define MAX_Y_SPEED 2
+#define EFFECT_SPEED 0.2
+#define MIN_Y_SPEED 0.1
+#define MAX_Y_SPEED 0.7
 
 
 //Define Variables
-Adafruit_SSD1306 display(OLED_RESET);
+Adafruit_SH1106 display(7, 8, 6);
 
 int paddleLocationA = 0;
 int paddleLocationB = 0;
 
 float ballX = SCREEN_WIDTH/2;
 float ballY = SCREEN_HEIGHT/2;
-float ballSpeedX = 2;
-float ballSpeedY = 1;
+float ballSpeedX = 0.3;
+float ballSpeedY = 0.3;
 
 int lastPaddleLocationA = 0;
 int lastPaddleLocationB = 0;
@@ -58,7 +58,7 @@ int scoreB = 0;
 //Setup 
 void setup() 
 {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3D);  // initialize with the I2C addr 0x3D (for the 128x64)
+  display.begin(SH1106_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();   // clears the screen and buffer
   display.display();   
   display.setTextWrap(false);
